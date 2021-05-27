@@ -1,35 +1,20 @@
-import React, {
-  useEffect, useState
-
-} from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, TouchableOpacity, FlatList, Image, StyleSheet } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { getProduct } from '../services/Api'
+// import { getProduct } from '../services/Api'
 import { getImage } from '../utils'
+import { getProduct } from '../reducers/productReducer'
+import { useDispatch, useSelector } from "react-redux";
 
-const productList = Array(10).fill(null).map((e, i) => ({
-  _id: i,
-  img: 'https://itcafe.vn/wp-content/uploads/2021/01/anh-gai-xinh-4.jpg',
-  name: 'T Shirt Women Funny Print',
-  heart: i % 2,
-  size: 'L',
-  price: 10 + i
-}))
 
 export default function App({ route, navigation }) {
-  const [product, setProduct] = useState()
+  // const [product, setProduct] = useState()
+  const dispatch = useDispatch();
+  const product = useSelector((store) => store.productReducer.products);
 
   useEffect(() => {
-    // alert('hello')
-    const getApiProduct = async () => {
-      const result = await getProduct()
-      console.log('result', result)
-      setProduct(result.data.data)
-    }
-
-    getApiProduct()
-
+    dispatch(getProduct({ page: 1, limit: 10 }));
   }, [])
 
 
@@ -64,7 +49,7 @@ export default function App({ route, navigation }) {
       </View>
       <Text style={{ textAlign: 'center', marginTop: 15, marginBottom: 20 }}>405 styles</Text>
       <FlatList
-        data={productList}
+        data={product}
         numColumns={2}
         renderItem={renderItem}
         keyExtractor={item => item._id?.toString()}
