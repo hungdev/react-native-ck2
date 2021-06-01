@@ -14,6 +14,7 @@ import Detail from '../screens/Detail'
 import WishList from '../screens/WishList'
 import Cart from '../screens/Cart'
 import Me from '../screens/Me'
+import LoginFb from '../screens/LoginFb'
 import Login from '../screens/Login'
 import Register from '../screens/Register'
 
@@ -69,7 +70,7 @@ const homeTab = () => {
 const authStack = () => {
   return (
     <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Login" component={LoginFb} />
       <Stack.Screen name="Register" component={Register} />
     </Stack.Navigator>
   )
@@ -80,7 +81,11 @@ export default function App() {
   const token = useSelector((store) => store.authReducer.token);
   return (
     <NavigationContainer>
-      {token ? homeTab() : authStack()}
+      {/* auth like facebook */}
+      {/* {token ? homeTab() : authStack()} */}
+
+      {/* auth like the coffe house */}
+      {homeTab()}
     </NavigationContainer>
   );
 }

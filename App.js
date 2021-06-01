@@ -6,13 +6,27 @@ import MainAppRoutes from './src/navigation/routes'
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import allReducer from './src/reducers'
+import { persistStore, persistReducer } from 'redux-persist'
+import { PersistGate } from 'redux-persist/es/integration/react';
+import AsyncStorage from '@react-native-community/async-storage';
 
-let store = createStore(allReducer, applyMiddleware(thunk));
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage
+}
+
+const persistedReducer = persistReducer(persistConfig, allReducer)
+
+let store = createStore(persistedReducer, applyMiddleware(thunk));
+
+let persistor = persistStore(store);
 
 export default function App() {
   return (
     <Provider store={store}>
-      <MainAppRoutes />
+      <PersistGate loading={null} persistor={persistor}>
+        <MainAppRoutes />
+      </PersistGate>
     </Provider>
   )
 }
