@@ -21,6 +21,16 @@ const productList = Array(10).fill(null).map((e, i) => ({
   price: 10 + i
 }))
 
+export const onLogin = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        data: { token: 'abcxyz' }
+      });
+    }, 300);
+  });
+};
+
 export const getProductData = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
