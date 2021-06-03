@@ -6,6 +6,7 @@ const initState = {
 
 export const getProduct = (params) => async (dispatch) => {
   const result = await getProductData(params);
+  console.tron.log('result', result)
   dispatch({ type: "GET_DATA", product: result?.data });
 };
 
