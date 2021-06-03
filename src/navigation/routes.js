@@ -17,6 +17,7 @@ import Me from '../screens/Me'
 import LoginFb from '../screens/LoginFb'
 import Login from '../screens/Login'
 import Register from '../screens/Register'
+import Places from '../screens/Places'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -46,6 +47,8 @@ const homeTab = () => {
             iconName = focused ? 'alarm-sharp' : 'alarm-outline';
           } else if (route.name === 'Cart') {
             iconName = focused ? 'airplane-sharp' : 'airplane-outline';
+          } else if (route.name === 'Places') {
+            iconName = focused ? 'location' : 'location-outline';
           } else if (route.name === 'Me') {
             iconName = focused ? 'airplane-sharp' : 'airplane-outline';
           }
@@ -60,6 +63,7 @@ const homeTab = () => {
       }}
     >
       <Tab.Screen name="Home" component={HomeStack} />
+      <Tab.Screen name="Places" component={Places} />
       <Tab.Screen name="WishList" component={WishList} />
       <Tab.Screen name="Cart" component={Cart} />
       <Tab.Screen name="Me" component={Me} />
