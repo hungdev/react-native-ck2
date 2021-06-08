@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useDispatch, useSelector } from "react-redux";
+import RNBootSplash from "react-native-bootsplash";
 
 import Home from '../screens/Home'
 import ProductList from '../screens/ProductList'
@@ -84,7 +85,7 @@ const authStack = () => {
 export default function App() {
   const token = useSelector((store) => store.authReducer.token);
   return (
-    <NavigationContainer>
+    <NavigationContainer onReady={() => RNBootSplash.hide()}>
       {/* auth like facebook */}
       {/* {token ? homeTab() : authStack()} */}
 
